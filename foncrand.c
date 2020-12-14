@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "foncrand.h""
+#include "foncrand.h"
 #include "matrice.h"
 
 double rand_ab_d(double a, double b){

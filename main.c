@@ -18,10 +18,10 @@ int main(int argc, char *argv[]) {
         matrice mat;
         mat.m=3;
         mat.n=3;
-        int retouri =rempli_matrice(&mat);
-        char nom[]= "test";
-        char comment[] = "commenttest";
-        int retour = ecrit_matrice(&mat ,&nom, &comment);
+        rempli_matrice(&mat);
+        char nom[20]=  "test";
+        char comment[50] = "commenttest";
+        ecrit_matrice(&mat,&nom,&comment);
     }
     else // si on a des arguments on vérifie que c'est nombres entiers et qu'il y'en a bien un nombre pair et qu'ils ne sont pas trop grand
     {
@@ -57,7 +57,7 @@ int main(int argc, char *argv[]) {
             }
             else
             {
-                double retour = rempli_matrice(&mat);
+                rempli_matrice(&mat);
                 affiche_matrice(&mat);
             }
         }
