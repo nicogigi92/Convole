@@ -2,26 +2,83 @@
 #include <stdlib.h>
 #include "matrice.h"
 #include "foncrand.h"
-#include <unistd.h>
+#include <getopt.h>
+#include <string.h>
+
+
 
 int main(int argc, char *argv[]) {
     printf("Convole, un outil de manipulation de matrice\n\n");
 
-    //-g <m1> <n1> <m2> <n2> ... generate matrice with no writing
-    // -o <m> <n> <filename> générer une matrice et l'enregistrer dans le filename
-    //-l <matname> lire une matrice de nom l
+    //initialisation
+    matrice mat;
+    int optch;
+    int comp;
+    int l = 0;
+    int o = 0;
+    char format[] = "o:l:";
+    extern int opterr;
+    opterr = 1;
+    char c;
+    char nom_fichier[100];
+    char commentaire[100];
 
+    //On se prémunie d'un éventuel bufferoverflow en controlant tout les parametres donnés par l'utilisateur
+    for(int i=1;i<argc;i++){        if (strlen(argv[i])>100){
+        printf("Un des arguments est trop long (>100).\n\n");
+        return 0;
+        }
+    }
+
+    while ((optch = getopt(argc,argv,format)) != -1) {
+        switch (optch) {
+        case 'o':
+            o = 1;
+            break;
+        case 'l':
+            l = 1;
+            break;
+        default :
+            printf("Mauvaises options lors du lancement du programme\n"); // si une autre option est utilisee
+            return 0;
+            break;
+        }
+    }
+    if (o==1) {
+        if ((sscanf(argv[3], "%d%c", &comp, &c) != 1) || (sscanf(argv[4], "%d%c", &comp, &c) != 1)) {
+            puts("Veuillez donner des nombres entiers");
+            return 0;
+        }
+        mat.m=atoi(argv[3]);
+        mat.n=atoi(argv[4]);
+        rempli_matrice(&mat);
+        strcpy(nom_fichier,argv[2]);
+        if (argv[5]!=NULL)
+             strcpy(commentaire,argv[5]);
+        ecrit_matrice(&mat,nom_fichier,commentaire);
+    }
+
+
+
+
+
+
+
+
+
+/*
 
     if(argc==1) //Si aucun arguments
     {
-
+         pour utiliser écrit matrice
         matrice mat;
-        mat.m=3;
-        mat.n=3;
+        mat.m=6;
+        mat.n=9;
         rempli_matrice(&mat);
-        char nom[20]=  "test";
-        char comment[50] = "commenttest";
+        char nom[20]=  "test2";
+        char comment[50] = "commentaire du deuxième test";
         ecrit_matrice(&mat,&nom,&comment);
+
     }
     else // si on a des arguments on vérifie que c'est nombres entiers et qu'il y'en a bien un nombre pair et qu'ils ne sont pas trop grand
     {
@@ -63,7 +120,7 @@ int main(int argc, char *argv[]) {
         }
     return 0;
     }
+*/
 }
-
 
 

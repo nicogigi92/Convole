@@ -9,6 +9,6 @@ typedef struct matrice {
 double rempli_matrice(matrice *M_ptr);
 void affiche_matrice(matrice *M_ptr);
 void affiche_matrice_base();
-int ecrit_matrice(matrice *M_ptr, char (*nom_fichier)[20], char (*commentaire)[50]);
+int ecrit_matrice(matrice *M_ptr, char *nom_fichier, char *commentaire);
 int est_nulle(matrice *M_ptr);
 #endif

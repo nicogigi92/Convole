@@ -1,22 +1,25 @@
 # depslib dependency file v1.0
-1607942533 source:/home/nico/C/Convole/foncrand.c
+1608038890 source:/home/nico/C/Convole/foncrand.c
 	<stdio.h>
 	<stdlib.h>
 	"foncrand.h"
 	"matrice.h"
+	<dirent.h>
+	<string.h>
 
-1606058484 /home/nico/C/Convole/foncrand.h
+1608038126 /home/nico/C/Convole/foncrand.h
 
-1607944961 /home/nico/C/Convole/matrice.h
+1608041291 /home/nico/C/Convole/matrice.h
 
-1607944741 source:/home/nico/C/Convole/main.c
+1608044380 source:/home/nico/C/Convole/main.c
 	<stdio.h>
 	<stdlib.h>
 	"matrice.h"
 	"foncrand.h"
-	<unistd.h>
+	<getopt.h>
+	<string.h>
 
-1607945062 source:/home/nico/C/Convole/matrice.c
+1608044408 source:/home/nico/C/Convole/matrice.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

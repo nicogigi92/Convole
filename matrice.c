@@ -75,15 +75,13 @@ int est_nulle(matrice *M_ptr){
 
 
 
-int ecrit_matrice(struct matrice *M_ptr, char (*nom_fichier)[20], char (*commentaire)[50])
+int ecrit_matrice(struct matrice *M_ptr, char *nom_fichier, char *commentaire)
 {
-    //chaine qu'on va écrire dans le fichier
-    char chemin_fichier[71];
-    char char_fichier[1000]={0};
-    //on ouvre le fichier en mode écriture
     FILE* fichier = NULL;
-    fichier = fopen(chemin_fichier, "w");
-    //matrice
+    int choix = 0;
+    char reponse;
+    char chemin_fichier[100];
+    char char_fichier[1000];
     int M=M_ptr->m;
     int N=M_ptr->n;
     int P = M*N;
@@ -91,20 +89,43 @@ int ecrit_matrice(struct matrice *M_ptr, char (*nom_fichier)[20], char (*comment
     int i=0;
 
 
-    if (strlen(*nom_fichier)>50)
+    //petite interface pour s'assurer que l'utilisateur écrit dans le bon fichier
+    while (!choix)
     {
-        printf("\n Le nom de fichier est trop long (>50).\n");
-        return 0;
+        if (listdir(nom_fichier))
+        {
+            printf("\n\nLe fichier %s existe déjà, voulez vous l'écraser [E], ou donner un nouveau nom de fichier [N] ? ",nom_fichier);
+            scanf("%s",&reponse);
+
+            if (strcmp(&reponse,"E")==0)
+                choix++;
+            else if (strcmp(&reponse,"N")==0){
+                printf("Donnez un nouveau nom de fichier : ");
+                scanf("%s",nom_fichier);
+            }
+            else{
+                printf("\nVeuillez choisir d'écraser [E] ou de donner un nouveau nom [N]");
+                choix=0;
+            }
+        }
+        else {
+            printf("\n\n Le fichier n'existe pas, on le créer\n\n");
+            choix++;
+        }
     }
 
-
     strcpy(chemin_fichier,"/home/nico/C/Convole/");
-    strcat(chemin_fichier,*nom_fichier);
-    //on ajoute le commentaire au début
-    strcpy(char_fichier,"#");
-    strcat(char_fichier,*commentaire);
-    strcat(char_fichier,"\n");
-    //on écrit dans la matrice comme on les avait print en passant par une chaine de caractère
+    strcat(chemin_fichier,nom_fichier);
+    fichier = fopen(chemin_fichier, "w");
+
+
+    if ((fichier != NULL) && !(est_nulle(M_ptr)))
+    {
+
+        //on ajoute le commentaire au début
+        strcpy(char_fichier,"#");
+        strcat(char_fichier,commentaire);
+        strcat(char_fichier,"\n");
         for(i=0;i<P;i++)
         {
             m=i/N;
@@ -121,9 +142,6 @@ int ecrit_matrice(struct matrice *M_ptr, char (*nom_fichier)[20], char (*comment
             strcat(strcat(char_fichier,s),"\n");
             }
         }
-
-    if ((fichier != NULL) && !(est_nulle(M_ptr)))
-        {
         fputs(char_fichier, fichier);
         fclose(fichier);
         printf("L'écriture a fonctionné.\n\n");
