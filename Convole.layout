@@ -2,37 +2,32 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="foncrand.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="matrice.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="133" topLine="0" />
+			<Cursor1 position="653" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="matrice.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="matrice.c" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="366" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="foncrand.c" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="423" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="matrice.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1501" topLine="24" />
+			<Cursor1 position="5845" topLine="40" />
 		</Cursor>
 		<Folding>
-			<Collapse line="9" />
-			<Collapse line="31" />
-			<Collapse line="54" />
-			<Collapse line="62" />
-			<Collapse line="66" />
-			<Collapse line="68" />
+			<Collapse line="10" />
+			<Collapse line="20" />
+			<Collapse line="28" />
+			<Collapse line="50" />
+			<Collapse line="71" />
+			<Collapse line="93" />
+			<Collapse line="100" />
+			<Collapse line="105" />
+			<Collapse line="107" />
+			<Collapse line="114" />
+			<Collapse line="141" />
 		</Folding>
 	</File>
-	<File name="main.c" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="main.c" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1117" topLine="39" />
+			<Cursor1 position="1680" topLine="57" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>
