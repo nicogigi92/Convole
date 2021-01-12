@@ -11,7 +11,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="a b c" />
+				<Option parameters="-c - a b  -o c" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
@@ -33,6 +33,10 @@
 			<Add option="-pedantic" />
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="calcul_matrice.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="calcul_matrice.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

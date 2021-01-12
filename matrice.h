@@ -3,7 +3,7 @@
 typedef struct matrice {
     int m;
     int n;
-    double *v;
+    double *v_ptr;
     //i=m*N+n,m=i/N div entière, n=i%N reste div entière
     } matrice;
 void affiche_alea(int n, double a, double b);
@@ -18,4 +18,5 @@ int lit_matrice(struct matrice *M_ptr, char * nom_fichier);
 int nbr_ligne_mat(FILE * fichier);
 int nombre_espace_str(char* str);
 double max_val_absolue(struct matrice *M_ptr);
+int alloue_matrice(matrice *M_ptr);
 #endif
