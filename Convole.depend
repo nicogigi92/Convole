@@ -9,22 +9,21 @@
 
 1608224072 /home/nico/C/Convole/foncrand.h
 
-1608325189 /home/nico/C/Convole/matrice.h
+1610469731 /home/nico/C/Convole/matrice.h
 
-1608333417 source:/home/nico/C/Convole/main.c
+1609858803 source:/home/nico/C/Convole/main.c
 	<stdio.h>
 	<stdlib.h>
 	"matrice.h"
-	"foncrand.h"
 	<getopt.h>
 	<string.h>
 
-1608334037 source:/home/nico/C/Convole/matrice.c
+1609854583 source:/home/nico/C/Convole/matrice.c
+	<math.h>
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"matrice.h"
-	"foncrand.h"
 	<ctype.h>
 	<dirent.h>
 

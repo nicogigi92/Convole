@@ -1,10 +1,11 @@
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "matrice.h"
-#include "foncrand.h"
 #include <ctype.h>
 #include <dirent.h>
+
 
 int TAILLE_MAX_FICHIER = 1000;
 
@@ -48,6 +49,21 @@ int listdir(const char* namefile){
 
 }
 
+double max_val_absolue(matrice *M_ptr){
+    int M=M_ptr->m;
+    int N=M_ptr->n;
+    int P = M*N;
+    int i=0;
+    double MAX = 0;
+
+    for(i=0;i<P;i++)
+    {
+        if (fabs(M_ptr->v[i]) > MAX)
+            MAX = fabs(M_ptr->v[i]);
+    }
+    return MAX;
+}
+
 double rempli_matrice(matrice *M_ptr){
     int M=M_ptr->m;
     int N=M_ptr->n;
@@ -58,7 +74,7 @@ double rempli_matrice(matrice *M_ptr){
     printf("Génération d'une matrice %d x %d....\n",M,N);
     for(i=0;i<P;i++)
     {
-        double addnbr = rand_ab_d(-10,10);
+        double addnbr = rand_ab_d(-20,20);
         M_ptr->v[i]=addnbr;
         if (addnbr > MAX)
         {
@@ -75,23 +91,29 @@ void affiche_matrice(struct matrice *M_ptr){
     int P = M*N;
     int m=0;
     int i=0;
+
     printf("Affichage de votre matrice %dx%d.\n\n",M,N);
-        for(i=0;i<P;i++)
+    printf("|  ");
+    for(i=0;i<P;i++)
+    {
+        m=i/N;
+        if (m==(i+1)/N)
         {
-            m=i/N;
-            if (m==(i+1)/N)
-            {
-            printf("%9f ",M_ptr->v[i]);
-            }
-            else
-            {
-            printf("%9f\n",M_ptr->v[i]);
-            }
+        printf("%12f ",M_ptr->v[i]);
         }
+        else
+        {
+        if(i<P-1)
+            printf("%12f   |\n|  ",M_ptr->v[i]);
+        else
+            printf("%12f   |\n",M_ptr->v[i]);
+        }
+    }
     printf("\nFin d'affichage de matrice.\n\n\n");
 }
 
 void affiche_matrice_base(matrice *M_ptr){
+    //génére et affiche une matrice 3x3
     M_ptr->m=3;
     M_ptr->n=3;
     rempli_matrice(M_ptr);
@@ -118,15 +140,11 @@ int ecrit_matrice(struct matrice *M_ptr, char *nom_fichier, char *commentaire){
     char reponse;
     char chemin_fichier[100];
     char char_fichier[1000];
-    int M=M_ptr->m;
-    int N=M_ptr->n;
-    int P = M*N;
+
+
     int m=0;
     int i=0;
     char str_int[10] = "";
-
-
-
 
     //petite interface pour s'assurer que l'utilisateur écrit bien la ou il veut
     while (!choix)
@@ -172,15 +190,15 @@ int ecrit_matrice(struct matrice *M_ptr, char *nom_fichier, char *commentaire){
         strcat(char_fichier,commentaire);
         strcat(char_fichier,"\n");
         //ajout de la taille de la matrice
-        sprintf(str_int, "%d ", M);
+        sprintf(str_int, "%d ", M_ptr->m);
         strcat(char_fichier,str_int);
-        sprintf(str_int, "%d", N);
+        sprintf(str_int, "%d", M_ptr->n);
         strcat(char_fichier,str_int);
         strcat(char_fichier,"\n");
-        for(i=0;i<P;i++)
+        for(i=0;i<(M_ptr->m*M_ptr->n);i++)
         {
-            m=i/N;
-            if (m==(i+1)/N)
+            m=i/M_ptr->n;
+            if (m==(i+1)/M_ptr->n)
             {
             char s[15] = {0};
             sprintf(s, "%.9lf",M_ptr->v[i]);
@@ -194,6 +212,7 @@ int ecrit_matrice(struct matrice *M_ptr, char *nom_fichier, char *commentaire){
             }
         }
         fputs(char_fichier, fichier);
+        rewind(fichier);
         fclose(fichier);
         printf("L'écriture a fonctionné.\n\n");
         return 1;
@@ -201,6 +220,8 @@ int ecrit_matrice(struct matrice *M_ptr, char *nom_fichier, char *commentaire){
 }
 
 int nombre_espace_str(char* str){
+    //donne le nombre d'espace dans une chaîne de caractère
+    //donne a 1 près le nombre de double d'une ligne de matrice
     int nbr=0;
     for(int i=0;i<strlen(str);i++){
         if(str[i]==' ')
@@ -212,79 +233,85 @@ int nombre_espace_str(char* str){
 int lit_matrice(struct matrice *M_ptr, char * nom_fichier){
     FILE *fichier = NULL;
     char *ligne = NULL;
-    int c=0;
-    int nval= 0;
-    int taille_max = 0;
-    long debut_ligne, fin_ligne;
-
-
+    int nval= 0;                    //nbr de double sur une ligne
+    int taille_max = 1000;             //taille_max d'une ligne
+    long debut_ligne, fin_ligne;    //curseur de début et fin de ligne
 
     fichier = fopen(nom_fichier, "r");
 
-    taille_max = 1000; //on va limiter les commentaires à 1000 caractères
-    //on récupère les dimensions de la matrice et on saute le commenaitre
-    if (fichier != NULL) {
-        ligne = (char*)malloc(taille_max);
-        fgets(ligne,taille_max,fichier);
-        if (ligne[0]!='#'){ // si il n'y a pas de commentaire au début du fichier
-            rewind(fichier);
-            fscanf(fichier," %i ",&M_ptr->m);
-            fscanf(fichier," %i ",&M_ptr->n);
-            rewind(fichier);
-            fgets(ligne,taille_max,fichier);
-            }
-        else{ //si il y'a un commentaire
-            rewind(fichier);
-            fgets(ligne,taille_max,fichier);
-            fscanf(fichier," %i ",&M_ptr->m);
-            fscanf(fichier," %i ",&M_ptr->n);
-            rewind(fichier);
-            fgets(ligne,taille_max,fichier);
-            fgets(ligne,taille_max,fichier);
-        }
-    }
-
-    //conditions d'arrêt du programme
+    //ouverture du fichier
+    //le fichier n'existe pas
     if (!listdir(nom_fichier)) {
         printf("Erreur : Le fichier %s n'existe pas.\n",nom_fichier);
         fclose(fichier);
         return 0;
         }
+    //erreur à l'ouverture
     else if (fichier == NULL) {
         printf("Erreur : Impossible d'ouvrir le fichier %s .\n",nom_fichier);
         return 0;
     }
-    else if (M_ptr->m*M_ptr->n>=100){//matrice trop grande
-        printf("Erreur : Matrice trop grande.\n");
-        fclose(fichier);
-        return 0;
+
+    //lecture des dimensions de la matrice
+    ligne = (char*)malloc(taille_max);
+    fgets(ligne,taille_max,fichier);
+    // si il n'y a pas de commentaire au début du fichier
+    if (ligne[0]!='#'){
+        rewind(fichier);
+        fscanf(fichier," %i ",&M_ptr->m);
+        fscanf(fichier," %i ",&M_ptr->n);
+        rewind(fichier);
+        fgets(ligne,taille_max,fichier);     //(pour passer la ligne mxn)
     }
-    //if erreur de format à coder
+    //si il y'a un commentaire
     else{
-        taille_max = 11*M_ptr->n*sizeof(char);
+        rewind(fichier);
+        fgets(ligne,taille_max,fichier);
+        fscanf(fichier," %i ",&M_ptr->m);
+        fscanf(fichier," %i ",&M_ptr->n);
+        rewind(fichier);
+        fgets(ligne,taille_max,fichier);     //(pour passer la ligne de commentaire)
+        fgets(ligne,taille_max,fichier);     //(pour passer la ligne mxn)
+    }
+
+
+    //if erreur de format
+    if(1==2)
+        printf("Il faut coder cette partie.\n\n");
+    //else if erreur de taille de stockage
+    else if(1==2)
+        printf("Il faut coder cette partie.\n\n");
+    //lecture matrice
+    else{
+
+        taille_max =15*M_ptr->n*sizeof(char);
         ligne = (char*)malloc(taille_max);
+
         for(int i=0;i<M_ptr->m;i++){
-            //nombre d'espace sur la ligne i
-            // pour j allant de 1 à nprime on scan puis on rajoute des zéro
+
+            //on lit une ligne en gardant les positions de début et fin de ligne en mémoire
             debut_ligne = ftell(fichier);
             fgets(ligne,taille_max,fichier);
             fin_ligne = ftell(fichier);
+            //nombre de double sur cette ligne
+            nval=1+nombre_espace_str(ligne);
 
-            nval=1+nombre_espace_str(ligne); //nombre de valeurs sur une ligne
-
+            //on reviens au début de la ligne pour la lire
             fseek(fichier,debut_ligne,SEEK_SET);
 
+            //on lit les doubles
             for(int j=0;j<nval;j++){
                 fscanf(fichier,"%lf",&M_ptr->v[i*M_ptr->n+j]);
               }
-
+            //quand il n'y a plus de double on met des zéros
             for (int j=nval;j<M_ptr->n;j++){
                 M_ptr->v[i*M_ptr->n+j]=0.0;
             }
-
-           fseek(fichier,fin_ligne,SEEK_SET);
+            //on s'assure d'être à la fin de la ligne après lecture
+            fseek(fichier,fin_ligne,SEEK_SET);
         }
     }
+    rewind(fichier);
     fclose(fichier);
     affiche_matrice(M_ptr);
     return 1;
