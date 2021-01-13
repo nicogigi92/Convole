@@ -21,7 +21,6 @@ int main(int argc, char *argv[]) {
     extern int opterr;
      opterr=1;
     int comp;
-    int res_allocation;
     int i =0;
     int valeur;
     char c;
@@ -122,7 +121,6 @@ int main(int argc, char *argv[]) {
                 return 0;
             }
         }
-
         //addition
         else if (type_de_calcul[0]=='+'){
             //on vérifie que les fichiers existent
@@ -229,7 +227,7 @@ int main(int argc, char *argv[]) {
 
 
                 if( alloue_matrice(&mat_ecriture) == 1){
-                    printf("Problème lors de l'allocation de la matrvBj7SWjZBMkvcCice\n\n.");
+                    printf("Problème lors de l'allocation de la matrice\n\n.");
                     free((&mat_ecriture)->v_ptr);
                     return 1;
                 }

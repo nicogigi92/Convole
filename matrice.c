@@ -79,7 +79,7 @@ double rempli_matrice(matrice *M_ptr){
     int P = M*N;
     int i=0;
     double MAX = 0;
-    printf("Génération d'une matrice %d x %d....\n",M,N);
+    printf("Génération d'une matrice %d x %d....\n\n",M,N);
     for(i=0;i<P;i++)
     {
         double addnbr = rand_ab_d(-20,20);
@@ -89,7 +89,7 @@ double rempli_matrice(matrice *M_ptr){
             MAX = addnbr;
         }
     }
-    printf("Matrice générée. Son max est %f.\n",MAX);
+    printf("Matrice générée. Son max est %f.\n\n",MAX);
     return MAX;
 }
 
@@ -298,7 +298,7 @@ int lit_matrice(struct matrice *M_ptr, char * nom_fichier){
 
             //on lit une ligne en gardant les positions de début et fin de ligne en mémoire
             debut_ligne = ftell(fichier);
-            fgets(ligne,TAILLE_MAX_LIGNE,fichier);
+            fgets(ligne,taille_max_ligne ,fichier);
             fin_ligne = ftell(fichier);
             //nombre de double sur cette ligne
             nval=1+nombre_espace_str(ligne);
