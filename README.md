@@ -24,26 +24,27 @@ Deuxième ligne : taille de la matrice
   
 ## Utilisation de l'outil convole : 
 
-$Convole  
+	$Convole  
 -->Convole affichera une matrice 3x3 généré aléatoirement  
 
-$Convole 1 2 3 4  
+	$Convole 1 2 3 4  
 --> générera et affichera une matrice 1x2 puis 3x4.  
 
-$Convole a.mat b.mat  
+	$Convole a.mat b.mat  
 --> lit et affiche le contenu des fichiers a.mat et b.mat s'ils existent.  
 
-$Convole -l a.mat   
+	$Convole -l a.mat   
 --> lit et affiche la matrice contenu dans le fichier a.mat  
 
-$Convole -c t a.mat  
+	$Convole -c t a.mat  
 --> transpose et affiche la transposé de la matrice contenu dans le fichier a.mat  
 
-$Convole -c + a.mat b.mat  
+	$Convole -c + a.mat b.mat  
 --> calcule a + b et affiche le résultat  
 
-$Convole -c - a.mat b.mat  
+	$Convole -c - a.mat b.mat  
 --> calcule a + b et affiche le résultat  
+
 
 ###Remarques sur l'utilisation de l'outil Convole : 
 
