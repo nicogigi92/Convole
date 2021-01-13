@@ -11,7 +11,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="-c - a b  -o c" />
+				<Option parameters="-c - exemple.mat  exemple_t.mat " />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>

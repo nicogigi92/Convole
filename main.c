@@ -17,7 +17,6 @@ int main(int argc, char *argv[]) {
     matrice mat_ecriture;           //instance de matrice à écrire
     matrice mat_lecture_1;          //instance de matrice qui contient ce qu'on aura lu d'un fichier
     matrice mat_lecture_2;          //instance de matrice qui contient ce qu'on aura lu d'un fichier
-         //matrice qui contient le résultat du calcul dans l'option -c
     int optch;
     extern int opterr;
      opterr=1;
@@ -134,6 +133,7 @@ int main(int argc, char *argv[]) {
                 }
                 else
                     mat_ecriture=additione(&mat_lecture_1,&mat_lecture_2);
+                    affiche_matrice(&mat_ecriture);
             }
             else{
                 return 0;
@@ -148,6 +148,7 @@ int main(int argc, char *argv[]) {
                 }
                 else
                     mat_ecriture=soustrait(&mat_lecture_1,&mat_lecture_2);
+                    affiche_matrice(&mat_ecriture);
             }
             else{
                 return 0;
