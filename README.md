@@ -1,13 +1,13 @@
-# Convole un outil de manipulation de matrice
+#Convole un outil de manipulation de matrice
 
-## Format d'un fichier.mat 
+##Format d'un fichier.mat 
 
  #CommentaireEnUnSeulMot  
  2 3  
  1.2 1.5   
  7.9   
 
-### Remarques sur le format d'un fichier: 
+###Remarques sur le format d'un fichier
 
 Premiere ligne : ligne de commentaire, le commentaire ne doit pas contenir d'espace.  
 Deuxième ligne : ligne de taille de la matrice, nombre de lignes (ici 2) de colonnes de la matrice (ici 3).  
