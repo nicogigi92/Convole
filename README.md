@@ -64,5 +64,6 @@ Un calcul (transposition, +, -)
 
 	Exemple : $Convole -c - a.mat b.mat -o aplusb.mat  
 
-	
+## Ce que Convole ne fait pas encore :
 
+Convole ne vérifie pas encore qu'un fichier donné en entrée pour lecture respecte le format de fichier .mat.   
