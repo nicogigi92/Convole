@@ -2,7 +2,7 @@
 
 ### format d'un fichier.mat ###
 
-# #CommentaireEnUnSeulMot
+#CommentaireEnUnSeulMot
 # 2 3
 # 1.2 1.5 
 # 7.9 # 
