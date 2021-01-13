@@ -1,13 +1,13 @@
-#Convole un outil de manipulation de matrice
+# Convole un outil de manipulation de matrice
 
-##Format d'un fichier.mat 
+## Format d'un fichier.mat 
 
  #CommentaireEnUnSeulMot  
  2 3  
  1.2 1.5   
  7.9   
 
-###Remarques sur le format d'un fichier
+### Remarques sur le format d'un fichier
 
 Première ligne : ligne de commentaire, le commentaire ne doit pas contenir d'espace.  
   
@@ -28,25 +28,25 @@ Deuxième ligne : taille de la matrice
 -->Convole affichera une matrice 3x3 généré aléatoirement  
 
 	$Convole 1 2 3 4  
---> générera et affichera une matrice 1x2 puis 3x4.  
+--> Génére et affiche une matrice 1x2 puis 3x4.  
 
 	$Convole a.mat b.mat  
---> lit et affiche le contenu des fichiers a.mat et b.mat s'ils existent.  
+--> Lit et affiche le contenu des fichiers a.mat et b.mat s'ils existent.  
 
 	$Convole -l a.mat   
---> lit et affiche la matrice contenu dans le fichier a.mat  
+--> Lit et affiche la matrice contenu dans le fichier a.mat  
 
 	$Convole -c t a.mat  
---> transpose et affiche la transposé de la matrice contenu dans le fichier a.mat  
+--> Transpose et affiche la transposé de la matrice contenu dans le fichier a.mat  
 
 	$Convole -c + a.mat b.mat  
---> calcule a + b et affiche le résultat  
+--> Calcule a + b et affiche le résultat  
 
 	$Convole -c - a.mat b.mat  
---> calcule a + b et affiche le résultat  
+--> Calcule a + b et affiche le résultat  
 
 
-###Remarques sur l'utilisation de l'outil Convole : 
+### Remarques sur l'utilisation de l'outil Convole : 
 
 	
 On peut coupler -l et -o de sorte à générer une matrice, l'enregister et visualiser le contenu du fichier :  
