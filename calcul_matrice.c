@@ -45,14 +45,22 @@ int test_taille_matrice(struct matrice * M1_ptr,struct matrice * M2_ptr){
     }
 }
 
-struct matrice  additione(struct matrice * M1_ptr,struct matrice * M2_ptr);
 struct matrice  additione(struct matrice * M1_ptr,struct matrice * M2_ptr){
+
      int i;
      matrice mat_retour;
     (&mat_retour)->m=M1_ptr->m;
     (&mat_retour)->n=M1_ptr->n;
-     for(i=0;i<M1_ptr->m*M1_ptr->n;i=i+1)
-        (&mat_retour)->v_ptr[i]=M1_ptr->v_ptr[i]+M2_ptr->v_ptr[i];
+
+    if( alloue_matrice(&mat_retour) == 1){
+        printf("Problème lors de l'allocation de la matrice\n\n.");
+        free((&mat_retour)->v_ptr);
+        exit(EXIT_FAILURE);
+    }
+    else{
+         for(i=0;i<M1_ptr->m*M1_ptr->n;i=i+1)
+            (&mat_retour)->v_ptr[i]=M1_ptr->v_ptr[i]+M2_ptr->v_ptr[i];
+    }
     return mat_retour;
 }
 
@@ -61,8 +69,16 @@ struct matrice soustrait(struct matrice * M1_ptr,struct matrice * M2_ptr){
     matrice mat_retour;
     (&mat_retour)->m=M1_ptr->m;
     (&mat_retour)->n=M1_ptr->n;
-     for(i=0;i<M1_ptr->m*M1_ptr->n;i=i+1)
-        (&mat_retour)->v_ptr[i]=M1_ptr->v_ptr[i]-M2_ptr->v_ptr[i];
+
+    if( alloue_matrice(&mat_retour) == 1){
+        printf("Problème lors de l'allocation de la matrice\n\n.");
+        free((&mat_retour)->v_ptr);
+        exit(EXIT_FAILURE);
+    }
+    else{
+         for(i=0;i<M1_ptr->m*M1_ptr->n;i=i+1)
+            (&mat_retour)->v_ptr[i]=M1_ptr->v_ptr[i]-M2_ptr->v_ptr[i];
+    }
     return mat_retour;
 }
 

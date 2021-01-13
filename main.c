@@ -77,16 +77,31 @@ int main(int argc, char *argv[]) {
         case 'c':
             c = 1;
             strcpy(type_de_calcul,optarg);
-            if (type_de_calcul[0]=='t'){                //on s'attend à avoir le nom de la matrice à transposer juste après
-                strcpy(nom_fichier_lu_1,argv[optind]);
+            if (type_de_calcul[0]=='t'){
+            //on s'attend à avoir le nom de la matrice à transposer juste après le t
+                if (optind<argc){
+                    strcpy(nom_fichier_lu_1,argv[optind]);
+                }
+                else{
+                    printf("Il y'a un problème dans vos arguments.\n");
+                    return 0;
+                }
+
             }
-            else{                                       // on attend deux noms de matrices pour +, -, * etc...
-                strcpy(nom_fichier_lu_1,argv[optind]);
-                strcpy(nom_fichier_lu_2,argv[optind+1]);
+            else{
+            // on attend deux noms de matrices pour +, -, * etc...
+                if (optind+1<argc){
+                    strcpy(nom_fichier_lu_1,argv[optind]);
+                    strcpy(nom_fichier_lu_2,argv[optind+1]);
+                }
+                else{
+                    printf("Il y'a un problème dans vos arguments.\n");
+                    return 0;
+                }
             }
             break;
         default :
-            printf("Mauvaises options lors du lancement du programme\n\n");
+            printf("Mauvaises options lors du lancement du programme.\n\n");
             return 0;
             break;
         }
@@ -96,35 +111,53 @@ int main(int argc, char *argv[]) {
 
     //option de calcul
     if(c==1){
+
         //transposition
         if (type_de_calcul[0]=='t'){
-            lit_matrice(&mat_lecture_1,nom_fichier_lu_1);
-            mat_ecriture = transpose(&mat_lecture_1);
-            affiche_matrice(&mat_ecriture);
-        }
-        //addition
-        else if (type_de_calcul[0]=='+'){
-            lit_matrice(&mat_lecture_1,nom_fichier_lu_1);
-            lit_matrice(&mat_lecture_2,nom_fichier_lu_2);
-            if (test_taille_matrice(&mat_lecture_1,&mat_lecture_2)==1)
+
+            if (lit_matrice(&mat_lecture_1,nom_fichier_lu_1)==1){
+                    mat_ecriture = transpose(&mat_lecture_1);
+                    affiche_matrice(&mat_ecriture);
+            }
+            else{
                 return 0;
-            else
-                mat_ecriture=additione(&mat_lecture_1,&mat_lecture_2);
-        }
-        //soustraction
-        else if (type_de_calcul[0]=='-'){
-            lit_matrice(&mat_lecture_1,nom_fichier_lu_1);
-            lit_matrice(&mat_lecture_2,nom_fichier_lu_2);
-            if (test_taille_matrice(&mat_lecture_1,&mat_lecture_2)==1)
-                return 0;
-            else
-                mat_ecriture=soustrait(&mat_lecture_1,&mat_lecture_2);
+            }
         }
 
+        //addition
+        else if (type_de_calcul[0]=='+'){
+            //on vérifie que les fichiers existent
+            if ( (lit_matrice(&mat_lecture_1,nom_fichier_lu_1)==1) && (lit_matrice(&mat_lecture_2,nom_fichier_lu_2) == 1 ) ){
+                //on verifie que les matrices sont de la bonne taille
+                if (test_taille_matrice(&mat_lecture_1,&mat_lecture_2)==1){
+                    return 0;
+                }
+                else
+                    mat_ecriture=additione(&mat_lecture_1,&mat_lecture_2);
+            }
+            else{
+                return 0;
+            }
+        }
+
+        //soustraction
+        else if (type_de_calcul[0]=='-'){
+            if ( (lit_matrice(&mat_lecture_1,nom_fichier_lu_1)==1) && (lit_matrice(&mat_lecture_2,nom_fichier_lu_2) == 1 ) ){
+                if (test_taille_matrice(&mat_lecture_1,&mat_lecture_2)==1){
+                    return 0;
+                }
+                else
+                    mat_ecriture=soustrait(&mat_lecture_1,&mat_lecture_2);
+            }
+            else{
+                return 0;
+            }
+        }
+
+        //on écrit si demandé
         if (o==1){
         ecrit_matrice(&mat_ecriture,nom_fichier,commentaire);
         }
-
 
         return 0;
     }
@@ -195,7 +228,7 @@ int main(int argc, char *argv[]) {
 
 
                 if( alloue_matrice(&mat_ecriture) == 1){
-                    printf("Problème lors de l'allocation de la matrice\n\n.");
+                    printf("Problème lors de l'allocation de la matrvBj7SWjZBMkvcCice\n\n.");
                     free((&mat_ecriture)->v_ptr);
                     return 1;
                 }

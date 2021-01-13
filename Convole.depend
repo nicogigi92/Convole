@@ -11,7 +11,7 @@
 
 1610485707 /home/nico/C/Convole/matrice.h
 
-1610494657 source:/home/nico/C/Convole/main.c
+1610531664 source:/home/nico/C/Convole/main.c
 	<stdio.h>
 	<stdlib.h>
 	"matrice.h"
@@ -19,7 +19,7 @@
 	<getopt.h>
 	<string.h>
 
-1610491986 source:/home/nico/C/Convole/matrice.c
+1610528552 source:/home/nico/C/Convole/matrice.c
 	<math.h>
 	<stdio.h>
 	<stdlib.h>
@@ -28,7 +28,7 @@
 	<ctype.h>
 	<dirent.h>
 
-1610494930 source:/home/nico/C/Convole/calcul_matrice.c
+1610527816 source:/home/nico/C/Convole/calcul_matrice.c
 	<math.h>
 	<stdio.h>
 	<stdlib.h>

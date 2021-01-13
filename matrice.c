@@ -251,7 +251,6 @@ int lit_matrice(struct matrice *M_ptr, char * nom_fichier){
     //le fichier n'existe pas
     if (!listdir(nom_fichier)) {
         printf("Erreur : Le fichier %s n'existe pas.\n",nom_fichier);
-        fclose(fichier);
         return 0;
         }
     //erreur à l'ouverture
@@ -287,15 +286,9 @@ int lit_matrice(struct matrice *M_ptr, char * nom_fichier){
              printf("Problème lors de l'allocation de la matrice\n\n.");
              free(M_ptr);
              free(ligne);
-             return 1;
+             return 0;
     }
-    //if erreur de format
-    else if(1==2)
-        printf("Il faut coder cette partie.\n\n");
-    //else if erreur de taille de stockage
-    else if(1==2)
-        printf("Il faut coder cette partie.\n\n");
-    //lecture matrice
+
     else{
 
         taille_max_ligne =15*M_ptr->n*sizeof(char);
